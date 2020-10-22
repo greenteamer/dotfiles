@@ -1,4 +1,4 @@
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.config/nvim/bundle/Vundle.vim
 
 call vundle#begin()
 
@@ -8,6 +8,8 @@ Plugin 'morhetz/gruvbox'
 Plugin 'dart-lang/dart-vim-plugin'
 
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plugin 'jparise/vim-graphql'
 
 Plugin 'cespare/vim-toml'
 
@@ -55,6 +57,8 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+set encoding=UTF-8
+
 " code folding
 set nofoldenable
 
@@ -92,9 +96,12 @@ let g:rustfmt_autosave = 1
 " nubmers
 set number
 set relativenumber
+set ignorecase
 
-"set list
-"set listchars=eol:¬,tab:>-,trail:~,space:_
+set list
+set listchars=eol:¬,tab:>-,trail:~,space:·
+" display indentation guides
+" set listchars=tab:❘-,trail:·,extends:»,precedes:«,nbsp:×
 
 
 " airline
