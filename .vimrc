@@ -2,16 +2,38 @@ set rtp+=~/.config/nvim/bundle/Vundle.vim
 
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'morhetz/gruvbox'
 
-Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+
+" Plugin 'sonph/onehalf', { 'rtp': 'vim' }
+" Plugin 'phanviet/vim-monokai-pro'
+" Plugin 'mhartington/oceanic-next'
+" Plugin 'gosukiwi/vim-atom-dark'
+" Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
+" Plugin 'ulwlu/elly.vim'
+" Plugin 'rakr/vim-one'
+
+Plugin 'justinmk/vim-sneak'
+
+" Plugin 'keith/swift.vim'
+" Plugin 'dart-lang/dart-vim-plugin'
+" Plugin 'reasonml-editor/vim-reason-plus'
+" Plugin 'rescript-lang/vim-rescript'
 
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'heavenshell/vim-jsdoc', { 
+  \ 'for': ['javascript', 'javascript.jsx','typescript'], 
+  \ 'do': 'make install'
+\}
+
 
 Plugin 'jparise/vim-graphql'
 
-Plugin 'cespare/vim-toml'
+" Plugin 'cespare/vim-toml'
 
 Plugin 'preservim/nerdtree'
 Plugin 'preservim/nerdcommenter'
@@ -26,25 +48,42 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 
 
-Plugin 'easymotion/vim-easymotion'
+" Plugin 'easymotion/vim-easymotion'
 
 Plugin 'HerringtonDarkholme/yats.vim' " TS Syntax
 
 
-Plugin 'jremmen/vim-ripgrep'
+" Plugin 'jremmen/vim-ripgrep'
 
 Plugin 'ryanoasis/vim-devicons'
 
 " Plugin 'prettier/vim-prettier'
-" Plugin 'sheerun/vim-polyglot'
+Plugin 'sheerun/vim-polyglot'
 
 call vundle#end()
 
+" GUI settings
+set guioptions-=m "remove menu bar
+set guioptions-=T "remove toolbar
+set guioptions-=r "remove right-hand scroll bar
+set guioptions-=L "remove left-hand scroll bar
+" set guifont=Hack\ Nerd\ Font\ Mono:h18
+" set guifont=Source\ Code\ Pro:h18
+
 set termguicolors
 colorscheme gruvbox
+" colorscheme solarized
+" colorscheme OceanicNext
+" colorscheme monokai_pro
+" colorscheme elly
+" colorscheme onehalfdark
+" let g:airline_theme='onehalfdark'
+set background=dark
+" set background=light
+" colorscheme one
 " Enable true color 启用终端24位色
 "if exists('+termguicolors')
   "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -75,16 +114,17 @@ let vim_markdown_preview_github=1
 " nerdtree
 "autocmd VimEnter * NERDTree
 "autocmd VimEnter * wincmd p
+let NERDTreeShowHidden=1
 
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|ios\|android'
 "let g:ctrlp_custom_ignore = 'dist'
 
-nmap <leader>ne :NERDTreeToggle<cr>
-map <C-n> :NERDTreeToggle<CR>
+" nmap <leader>ne :NERDTreeToggle<cr>
+map <C-n> :NERDTreeToggle %<CR>
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$']
 let NERDSpaceDelims=1
@@ -98,8 +138,8 @@ set number
 set relativenumber
 set ignorecase
 
-set list
-set listchars=eol:¬,tab:>-,trail:~,space:·
+" set list
+" set listchars=eol:¬,tab:>-,trail:~,space:·
 " display indentation guides
 " set listchars=tab:❘-,trail:·,extends:»,precedes:«,nbsp:×
 
@@ -107,6 +147,7 @@ set listchars=eol:¬,tab:>-,trail:~,space:·
 " airline
 " let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#enabled = 1
+" let g:airline_theme='one'
 
 " leader
 let mapleader = ","
@@ -145,6 +186,8 @@ inoremap <silent><expr> <C-j>
       \ <SID>check_back_space() ? "\<C-j>" :
       \ coc#refresh()
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+nnoremap <C-p> :Files<Cr>
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -251,7 +294,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -271,37 +314,45 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-let g:easymotion#is_active = 0
-function! EasyMotionCoc() abort
-  if EasyMotion#is_active()
-    let g:easymotion#is_active = 1
-    CocDisable
-  else
-    if g:easymotion#is_active == 1
-      let g:easymotion#is_active = 0
-      CocEnable
-    endif
-  endif
-endfunction
-autocmd TextChanged,CursorMoved * call EasyMotionCoc()
+" let g:easymotion#is_active = 0
+" function! EasyMotionCoc() abort
+  " if EasyMotion#is_active()
+    " let g:easymotion#is_active = 1
+    " CocDisable
+  " else
+    " if g:easymotion#is_active == 1
+      " let g:easymotion#is_active = 0
+      " CocEnable
+    " endif
+  " endif
+" endfunction
+" autocmd TextChanged,CursorMoved * call EasyMotionCoc()
 
-"" sync open file with NERDTree
-"" " Check if NERDTree is open or active
-"function! IsNERDTreeOpen()        
-  "return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-"endfunction
+let g:sneak#label = 1
 
-"" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-"" file, and we're not in vimdiff
-"function! SyncTree()
-  "if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    "NERDTreeFind
-    "wincmd p
-  "endif
-"endfunction
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+
+" sync open file with NERDTree
+" " Check if NERDTree is open or active
+" function! IsNERDTreeOpen()        
+  " return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+" endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+" function! SyncTree()
+  " if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    " NERDTreeFind
+    " wincmd p
+  " endif
+" endfunction
 
 "" Highlight currently open buffer in NERDTree
-"autocmd BufEnter * call SyncTree()
+" autocmd BufEnter * call SyncTree()
+
+" All the languages Kite supports
+let g:kite_supported_languages = ['*']
 
 " coc config
 let g:coc_global_extensions = [
