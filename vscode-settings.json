@@ -1,0 +1,60 @@
+{
+  "editor.fontSize": 17,
+  "editor.tabSize": 2,
+  "vim.easymotion": true,
+  "vim.leader": ",",
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["leader", "e"],
+      "commands": ["workbench.action.toggleSidebarVisibility"],
+      "before": ["leader", "c"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    }
+  ],
+  "terminal.integrated.gpuAcceleration": "off",
+  "vscode_vibrancy.theme": "Default Dark",
+  "workbench.iconTheme": "Monokai Pro (Filter Octagon) Icons",
+  "editor.accessibilitySupport": "off",
+  "editor.lineNumbers": "relative",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/.ammonite": true
+  },
+  "[scala]": {
+    "editor.defaultFormatter": "scalameta.metals"
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[fsharp]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Ionide.Ionide-fsharp"
+  },
+  "colorize.languages": [
+    "javascript",
+    "typescript"
+    // ...
+  ],
+  "editor.fontLigatures": true,
+  // "editor.fontFamily": "InconsolataNerdFontCompleteM-Regular, 'Courier New', monospace",
+  // "debug.console.fontSize": 15
+  // "terminal.integrated.fontFamily": "Menlo",
+  "terminal.integrated.fontSize": 15,
+  "editor.fontFamily": "JetBrains Mono, Inconsolata Nerd Font Mono, 'Courier New', monospace",
+  "[elm]": {
+    "editor.defaultFormatter": "elmTooling.elm-ls-vscode"
+  },
+  "[rescript]": {
+    "editor.defaultFormatter": "chenglou92.rescript-vscode"
+  },
+  "workbench.colorTheme": "Rescript Light Theme",
+  "editor.inlineSuggest.enabled": true
+}
